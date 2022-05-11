@@ -1,0 +1,41 @@
+package com.codekul.Java10FebSpring;
+
+import com.codekul.Java10FebSpring.ioc.Jio;
+import com.codekul.Java10FebSpring.ioc.SimConfig;
+import com.codekul.Java10FebSpring.ioc.Vodafone;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+@RestController
+public class Java10FebSpringApplication {
+
+    public static void main(String[] args) {
+        ConfigurableApplicationContext applicationContext = SpringApplication.run(Java10FebSpringApplication.class, args);
+        Vodafone vodafone1 = applicationContext.getBean(Vodafone.class);
+        vodafone1.calling();
+
+        ApplicationContext applicationContext1 = new AnnotationConfigApplicationContext(SimConfig.class);
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(applicationContext1);
+
+        Jio jio = context.getBean(Jio.class);
+        jio.calling();
+        jio.msg();
+
+        Vodafone vodafone = applicationContext1.getBean(Vodafone.class);
+        vodafone.msg();
+        vodafone.calling();
+    }
+
+    @GetMapping("hello")
+    public String msg() {
+        return "Hello Spring...";
+    }
+
+}
