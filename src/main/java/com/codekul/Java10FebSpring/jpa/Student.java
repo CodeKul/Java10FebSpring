@@ -1,8 +1,7 @@
 package com.codekul.Java10FebSpring.jpa;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "student")
@@ -11,11 +10,23 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
 
-    String name;
+    private String name;
 
-    String address;
+    private String address;
+
+    private LocalDate birthDate;
+
+    private Boolean status;
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
 
     public Integer getId() {
         return id;
