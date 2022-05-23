@@ -3,6 +3,7 @@ package com.codekul.Java10FebSpring.jpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -68,6 +69,7 @@ public class StudentController {
         studentRepository.deleteAllById(ids);
         return "student deleted";
     }
+    @OneToOne
 
     @GetMapping("getByName/{name}")
     public Student getByName(@PathVariable("name") String name) {
