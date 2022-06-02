@@ -1,9 +1,14 @@
 package com.codekul.Java10FebSpring.manytomany.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,35 +23,4 @@ public class Teacher {
     inverseJoinColumns = {@JoinColumn(name = "sub_id",referencedColumnName = "id")})
     private List<Subjects> subjects;
 
-    public Integer getId() {
-        return id;
     }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public List<Subjects> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(List<Subjects> subjects) {
-        this.subjects = subjects;
-    }
-}
