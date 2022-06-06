@@ -46,6 +46,11 @@ public class TeacherController {
         res.setMessage("Sending string value");
         return new ResponseEntity<>(res,HttpStatus.OK);
     }
+  @GetMapping(value = "getTeacherData")
+  public ResponseEntity<?> getTeacherData(){
+
+        return new ResponseEntity<>(teacherRepo.getTeacherData(),HttpStatus.OK);
+    }
 
     @PostMapping("saveSubject")
     public ResponseEntity<?> saveSubject(@RequestBody Subjects subjects) {
