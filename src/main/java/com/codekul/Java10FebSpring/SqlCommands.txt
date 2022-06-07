@@ -1,0 +1,82 @@
+mysql> create table bank(id int primary key, bank_name varchar(20),ifcs_code varchar(20));
+mysql> create table customer(id int primary key, name varchar(20),address varchar(20),bank_id int, foreign key (bank_id) references bank(id));
+mysql> insert into bank(id,bank_name,ifcs_code)values(2,'HDFC','If1020HDFC');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into bank(id,bank_name,ifcs_code)values(3,'ICICI','If1020IC');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from bank;
++----+-----------+------------+
+| id | bank_name | ifcs_code  |
++----+-----------+------------+
+|  1 | SBI       | If1020SBI  |
+|  2 | HDFC      | If1020HDFC |
+|  3 | ICICI     | If1020IC   |
++----+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into customer (id,name,address,bank_id)values(1,'rakesh','pune',1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer (id,name,address,bank_id)values(2,'ramesh','mumbai',2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer (id,name,address,bank_id)values(3,'rahul','nashik',3);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customer;
++----+--------+---------+---------+
+| id | name   | address | bank_id |
++----+--------+---------+---------+
+|  1 | rakesh | pune    |       1 |
+|  2 | ramesh | mumbai  |       2 |
+|  3 | rahul  | nashik  |       3 |
++----+--------+---------+---------+
+3 rows in set (0.00 sec)
+
+mysql> update customer set address ='Sangli' where id =1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++----+--------+---------+---------+
+| id | name   | address | bank_id |
++----+--------+---------+---------+
+|  1 | rakesh | Sangli  |       1 |
+|  2 | ramesh | mumbai  |       2 |
+|  3 | rahul  | nashik  |       3 |
++----+--------+---------+---------+
+3 rows in set (0.00 sec)
+
+mysql> delete from customer where id =3;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customer;
++----+--------+---------+---------+
+| id | name   | address | bank_id |
++----+--------+---------+---------+
+|  1 | rakesh | Sangli  |       1 |
+|  2 | ramesh | mumbai  |       2 |
++----+--------+---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> update customer set address ='Sangli';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 2  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++----+--------+---------+---------+
+| id | name   | address | bank_id |
++----+--------+---------+---------+
+|  1 | rakesh | Sangli  |       1 |
+|  2 | ramesh | Sangli  |       2 |
++----+--------+---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> update customer set address ='Mumbai' where id = 2 ;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>
+
