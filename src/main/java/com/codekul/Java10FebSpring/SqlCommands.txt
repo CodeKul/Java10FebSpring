@@ -78,5 +78,144 @@ mysql> update customer set address ='Mumbai' where id = 2 ;
 Query OK, 1 row affected (0.01 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
-mysql>
+mysql> insert into customer (id,name,address,bank_id)values(3,'avinash','pune',null);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customer;
++----+---------+---------+---------+
+| id | name    | address | bank_id |
++----+---------+---------+---------+
+|  1 | rakesh  | Sangli  |       1 |
+|  2 | ramesh  | Mumbai  |       2 |
+|  3 | avinash | pune    |    NULL |
++----+---------+---------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from bank b  inner join customer c on c.bank_id = b.id;
++----+-----------+------------+----+--------+---------+---------+
+| id | bank_name | ifcs_code  | id | name   | address | bank_id |
++----+-----------+------------+----+--------+---------+---------+
+|  1 | SBI       | If1020SBI  |  1 | rakesh | Sangli  |       1 |
+|  2 | HDFC      | If1020HDFC |  2 | ramesh | Mumbai  |       2 |
++----+-----------+------------+----+--------+---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from bank b  inner join customer c on c.bank_id = b.id where c.id is null;
+Empty set (0.00 sec)
+
+mysql> select * from bank b  left  join customer c on c.bank_id = b.id where c.id is null;
++----+-----------+-----------+------+------+---------+---------+
+| id | bank_name | ifcs_code | id   | name | address | bank_id |
++----+-----------+-----------+------+------+---------+---------+
+|  3 | ICICI     | If1020IC  | NULL | NULL | NULL    |    NULL |
++----+-----------+-----------+------+------+---------+---------+
+1 row in set (0.01 sec)
+
+mysql> select * from bank b  left  join customer c on c.bank_id = b.id;
++----+-----------+------------+------+--------+---------+---------+
+| id | bank_name | ifcs_code  | id   | name   | address | bank_id |
++----+-----------+------------+------+--------+---------+---------+
+|  1 | SBI       | If1020SBI  |    1 | rakesh | Sangli  |       1 |
+|  2 | HDFC      | If1020HDFC |    2 | ramesh | Mumbai  |       2 |
+|  3 | ICICI     | If1020IC   | NULL | NULL   | NULL    |    NULL |
++----+-----------+------------+------+--------+---------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from bank b  right  join customer c on c.bank_id = b.id;
++------+-----------+------------+----+---------+---------+---------+
+| id   | bank_name | ifcs_code  | id | name    | address | bank_id |
++------+-----------+------------+----+---------+---------+---------+
+|    1 | SBI       | If1020SBI  |  1 | rakesh  | Sangli  |       1 |
+|    2 | HDFC      | If1020HDFC |  2 | ramesh  | Mumbai  |       2 |
+| NULL | NULL      | NULL       |  3 | avinash | pune    |    NULL |
++------+-----------+------------+----+---------+---------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from bank b  right  join customer c on c.bank_id = b.id union all select * from bank b  left  join customer c on c.bank_id =
+b.id;
++------+-----------+------------+------+---------+---------+---------+
+| id   | bank_name | ifcs_code  | id   | name    | address | bank_id |
++------+-----------+------------+------+---------+---------+---------+
+|    1 | SBI       | If1020SBI  |    1 | rakesh  | Sangli  |       1 |
+|    2 | HDFC      | If1020HDFC |    2 | ramesh  | Mumbai  |       2 |
+| NULL | NULL      | NULL       |    3 | avinash | pune    |    NULL |
+|    1 | SBI       | If1020SBI  |    1 | rakesh  | Sangli  |       1 |
+|    2 | HDFC      | If1020HDFC |    2 | ramesh  | Mumbai  |       2 |
+|    3 | ICICI     | If1020IC   | NULL | NULL    | NULL    |    NULL |
++------+-----------+------------+------+---------+---------+---------+
+6 rows in set (0.00 sec)
+
+mysql> alter table customer add column dob date;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from customer;
++----+---------+---------+---------+------+
+| id | name    | address | bank_id | dob  |
++----+---------+---------+---------+------+
+|  1 | rakesh  | Sangli  |       1 | NULL |
+|  2 | ramesh  | Mumbai  |       2 | NULL |
+|  3 | avinash | pune    |    NULL | NULL |
++----+---------+---------+---------+------+
+3 rows in set (0.00 sec)
+
+mysql> update customer set dob = '1992-09-23';
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from customer;
++----+---------+---------+---------+------------+
+| id | name    | address | bank_id | dob        |
++----+---------+---------+---------+------------+
+|  1 | rakesh  | Sangli  |       1 | 1992-09-23 |
+|  2 | ramesh  | Mumbai  |       2 | 1992-09-23 |
+|  3 | avinash | pune    |    NULL | 1992-09-23 |
++----+---------+---------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update customer set dob = '1999-09-23' where id =1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update customer set dob = '2000-03-28' where id =2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++----+---------+---------+---------+------------+
+| id | name    | address | bank_id | dob        |
++----+---------+---------+---------+------------+
+|  1 | rakesh  | Sangli  |       1 | 1999-09-23 |
+|  2 | ramesh  | Mumbai  |       2 | 2000-03-28 |
+|  3 | avinash | pune    |    NULL | 1992-09-23 |
++----+---------+---------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer order by dob;
++----+---------+---------+---------+------------+
+| id | name    | address | bank_id | dob        |
++----+---------+---------+---------+------------+
+|  3 | avinash | pune    |    NULL | 1992-09-23 |
+|  1 | rakesh  | Sangli  |       1 | 1999-09-23 |
+|  2 | ramesh  | Mumbai  |       2 | 2000-03-28 |
++----+---------+---------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer order by dob desc;
++----+---------+---------+---------+------------+
+| id | name    | address | bank_id | dob        |
++----+---------+---------+---------+------------+
+|  2 | ramesh  | Mumbai  |       2 | 2000-03-28 |
+|  1 | rakesh  | Sangli  |       1 | 1999-09-23 |
+|  3 | avinash | pune    |    NULL | 1992-09-23 |
++----+---------+---------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer where dob between '1990-01-01' AND '1995-01-01';
++----+---------+---------+---------+------------+
+| id | name    | address | bank_id | dob        |
++----+---------+---------+---------+------------+
+|  3 | avinash | pune    |    NULL | 1992-09-23 |
++----+---------+---------+---------+------------+
+1 row in set (0.00 sec)
 
