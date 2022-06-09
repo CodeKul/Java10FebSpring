@@ -219,3 +219,113 @@ mysql> select * from customer where dob between '1990-01-01' AND '1995-01-01';
 +----+---------+---------+---------+------------+
 1 row in set (0.00 sec)
 
+mysql> alter table customer modify address varchar(500)  null;
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table customer modify address varchar(500) not null;
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table customer modify address varchar(500);
+Query OK, 3 rows affected (0.06 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+
+mysql> alter table customer rename column address to addresss;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from customer;
++----+---------+----------+---------+------------+
+| id | name    | addresss | bank_id | dob        |
++----+---------+----------+---------+------------+
+|  1 | rakesh  | Sangli   |       1 | 1999-09-23 |
+|  2 | ramesh  | Mumbai   |       2 | 2000-03-28 |
+|  3 | avinash | pune     |    NULL | 1992-09-23 |
++----+---------+----------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> rename table customer to cust;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> alter table customer add column balance int;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update customer set balance =5000 where id=1
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update customer set balance =34244 where id=2;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update customer set balance =42322 where id=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++----+---------+---------+---------+------------+---------+
+| id | name    | address | bank_id | dob        | balance |
++----+---------+---------+---------+------------+---------+
+|  1 | rakesh  | Sangli  |       1 | 1999-09-23 |    5000 |
+|  2 | ramesh  | Mumbai  |       2 | 2000-03-28 |   34244 |
+|  3 | avinash | pune    |    NULL | 1992-09-23 |   42322 |
++----+---------+---------+---------+------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select max(balance) as balance from customer;
++---------+
+| balance |
++---------+
+|   42322 |
++---------+
+1 row in set (0.01 sec)
+
+mysql> select min(balance) as balance from customer;
++---------+
+| balance |
++---------+
+|    5000 |
++---------+
+1 row in set (0.01 sec)
+
+mysql> select avg(balance) as balance from customer;
++------------+
+| balance    |
++------------+
+| 27188.6667 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) as balance from customer;
++---------+
+| balance |
++---------+
+|       3 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select sum(balance) as balance from customer;
++---------+
+| balance |
++---------+
+|   81566 |
++---------+
+1 row in set (0.00 sec)
+
+mysql>
+
+mysql> alter table customer drop foreign key customer_ibfk_1;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table customer drop column bank_id ;
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table customer drop column balance ;
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
