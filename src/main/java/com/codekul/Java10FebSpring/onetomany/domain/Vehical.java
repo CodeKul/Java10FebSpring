@@ -16,6 +16,15 @@ public class Vehical {
 
     private String colour;
 
+    public Vehical() {
+    }
+
+    public Vehical(Integer id, String name, String colour) {
+        this.id = id;
+        this.name = name;
+        this.colour = colour;
+    }
+
     @OneToMany(mappedBy = "vehical", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Parts> parts;
