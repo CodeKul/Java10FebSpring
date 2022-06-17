@@ -1,5 +1,7 @@
 package com.codekul.Java10FebSpring;
 
+import com.codekul.Java10FebSpring.apo.Boy;
+import com.codekul.Java10FebSpring.apo.Girl;
 import com.codekul.Java10FebSpring.di.Company;
 import com.codekul.Java10FebSpring.ioc.Jio;
 import com.codekul.Java10FebSpring.ioc.SimConfig;
@@ -32,8 +34,15 @@ public class Java10FebSpringApplication {
 //        vodafone.msg();
 //        vodafone.calling();
 
-        Company company = applicationContext.getBean(Company.class);
-        company.display();
+//        Company company = applicationContext.getBean(Company.class);
+//        company.display();
+
+
+        Boy boy = applicationContext.getBean(Boy.class);
+        Girl girl = applicationContext.getBean(Girl.class);
+        //
+        boy.study();
+        girl.study();
     }
 
     @GetMapping("hello")
