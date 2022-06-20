@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Java10FebSpringApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(Java10FebSpringApplication.class, args);
         Vodafone vodafone1 = applicationContext.getBean(Vodafone.class);
 //        vodafone1.calling();
@@ -41,8 +41,9 @@ public class Java10FebSpringApplication {
         Boy boy = applicationContext.getBean(Boy.class);
         Girl girl = applicationContext.getBean(Girl.class);
         //
-        boy.study();
+        boy.studyMaths(6);
         girl.study();
+        boy.myException();
     }
 
     @GetMapping("hello")
