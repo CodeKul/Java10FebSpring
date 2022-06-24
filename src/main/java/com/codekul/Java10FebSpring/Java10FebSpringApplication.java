@@ -6,6 +6,8 @@ import com.codekul.Java10FebSpring.di.Company;
 import com.codekul.Java10FebSpring.ioc.Jio;
 import com.codekul.Java10FebSpring.ioc.SimConfig;
 import com.codekul.Java10FebSpring.ioc.Vodafone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 public class Java10FebSpringApplication {
+
+    private static Logger logger = LoggerFactory.getLogger(Java10FebSpringApplication.class);
+
 
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(Java10FebSpringApplication.class, args);
@@ -38,16 +43,23 @@ public class Java10FebSpringApplication {
 //        company.display();
 
 
-        Boy boy = applicationContext.getBean(Boy.class);
-        Girl girl = applicationContext.getBean(Girl.class);
-        //
-        boy.studyMaths(6);
-        girl.study();
-        boy.myException();
+//        Boy boy = applicationContext.getBean(Boy.class);
+//        Girl girl = applicationContext.getBean(Girl.class);
+
+//        boy.studyMaths(6);
+//        girl.study();
+//        boy.myException();
+
+
     }
 
     @GetMapping("hello")
     public String msg() {
+        logger.debug("in debugging");
+        logger.info("In info");
+        logger.warn("In warning");
+        logger.error("In error");
+        logger.trace("trace");
         return "Hello Spring...";
     }
 
